@@ -1,0 +1,7 @@
+
+if (headers_sent()) {
+    die("Headers already sent. Cannot redirect.");
+}
+
+If you see this message, check where output started (possibly echo, print, or whitespace before <?php).
+

@@ -1,0 +1,4 @@
+Revision: b86a967ac
+Date: 02-03-2025
+Build No: 39-8
+Database: 111-AROM-165-Stock-related-issue.sql

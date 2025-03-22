@@ -1,0 +1,16 @@
+RewriteEngine on
+RewriteCond $1 !^(index\.php|resources|robots\.txt)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:ojayurved.com
+RewriteEngine on
+RewriteCond %{HTTPS} on
+RewriteCond %{HTTP_HOST} (www\.)arominfotech.net
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:ojayurved.com
+
+php_value max_execution_time 86400
+php_value default_socket_timeout 86400
+php_value mysqlnd.net_read_timeout 31536000

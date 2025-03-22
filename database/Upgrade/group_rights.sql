@@ -1,0 +1,172 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Dec 25, 2024 at 04:28 AM
+-- Server version: 10.6.20-MariaDB-cll-lve
+-- PHP Version: 8.1.29
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `sheet_sais`
+--
+
+-- --------------------------------------------------------
+
+TRUNCATE TABLE `group_rights`;
+
+--
+-- Dumping data for table `group_rights`
+--
+
+INSERT INTO `group_rights` (`group_master_id`, `menu_master_id`, `list`, `add`, `update`, `delete`, `export`, `import`) VALUES
+( 7, 1, 'Yes', 'Yes', 'No', 'No', 'No', 'No'),
+( 7, 3, 'Yes', 'No', 'No', 'No', 'No', 'No'),
+( 5, 1, 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No'),
+( 5, 4, 'Yes', 'No', 'No', 'No', 'No', 'No'),
+( 5, 5, 'Yes', 'Yes', 'No', 'No', 'No', 'No'),
+( 5, 6, 'Yes', 'Yes', 'Yes', 'No', 'No', 'No'),
+( 5, 11, 'Yes', 'No', 'No', 'No', 'No', 'No'),
+( 5, 12, 'Yes', 'No', 'No', 'No', 'No', 'No'),
+( 5, 13, 'Yes', 'No', 'No', 'No', 'No', 'No'),
+( 5, 14, 'Yes', 'No', 'No', 'No', 'No', 'No'),
+( 5, 18, 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'Yes'),
+( 5, 26, 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No'),
+( 5, 61, 'Yes', 'Yes', 'Yes', 'No', 'No', 'No'),
+( 1, 1, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 2, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 3, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 4, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 5, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 6, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 7, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 8, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 9, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 10, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 11, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 12, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 13, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 14, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 15, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 16, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 17, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 18, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 19, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 20, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 21, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 22, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 23, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 24, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 25, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 26, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 27, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 28, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 29, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 30, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 31, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 32, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 33, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 34, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 35, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 36, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 37, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 38, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 39, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 41, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 42, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 43, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 44, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 45, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 46, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 47, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 48, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 49, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 50, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 51, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 52, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 53, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 54, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 55, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 56, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 57, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 58, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 59, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 60, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 61, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 62, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 63, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 64, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 65, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 66, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 67, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 68, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 69, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 70, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 71, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 72, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 74, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 75, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 76, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 77, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 78, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 79, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 80, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 81, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 82, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 83, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 84, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 85, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 86, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 87, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 88, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 89, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 90, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 91, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 92, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 93, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 94, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 96, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 97, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 98, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 99, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 100, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 101, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 103, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 104, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 105, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 106, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 107, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 108, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 109, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 1, 110, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 6, 1, 'No', 'Yes', 'No', 'No', 'No', 'No'),
+( 6, 9, 'Yes', 'Yes', 'Yes', 'No', 'No', 'No'),
+( 6, 39, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No'),
+( 6, 41, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 6, 42, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 6, 43, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 6, 47, 'Yes', 'Yes', 'Yes', 'No', 'No', 'No'),
+( 2, 1, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 2, 2, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No'),
+( 2, 3, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes'),
+( 2, 18, 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'Yes'),
+( 2, 19, 'Yes', 'Yes', 'Yes', 'No', 'No', 'No'),
+( 2, 43, 'Yes', 'Yes', 'Yes', 'Yes', 'No', 'No'),
+( 2, 46, 'Yes', 'Yes', 'Yes', 'No', 'No', 'No'),
+( 2, 47, 'Yes', 'Yes', 'Yes', 'No', 'No', 'No'),
+( 2, 53, 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'Yes'),
+( 2, 61, 'Yes', 'Yes', 'Yes', 'No', 'No', 'No'),
+( 2, 96, 'Yes', 'Yes', 'Yes', 'No', 'No', 'No'),
+( 2, 98, 'Yes', 'Yes', 'Yes', 'No', 'Yes', 'No'),
+( 2, 103, 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No'),
+( 2, 110, 'Yes', 'Yes', 'Yes', 'No', 'No', 'No');
