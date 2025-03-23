@@ -1431,6 +1431,9 @@ class ExportController extends CommonController
      * Export parts stock
      */
     function export_parts_stock() {
+        $entitlements = $this->session->userdata("entitlements");
+        $isSheetMetal = isset($entitlements['isSheetMetal']) && $entitlements['isSheetMetal'] != null ? "Yes" : "No";
+
         $expType = $this->uri->segment('2');
         $this->load->library("excel");
         $clientId = $this->Unit->getSessionClientId();
@@ -1456,14 +1459,25 @@ class ExportController extends CommonController
             $sheet->getStyle('D1:E1')->applyFromArray($headingsStyle1);
             $sheet->getStyle('D:D')->applyFromArray($headingsStyle1);
             $sheet->getStyle('E:E')->applyFromArray($headingsStyle1);
+            if($expType == 'supplier'){
+                $sheet->getStyle('F1:F1')->applyFromArray($headingsStyle);
+                array_push($table_columns,'Production Qty');
+            }
 
         } else {
-            $table_columns = array("Part Number", "Part Description", "Rate", "Stock");
+            $table_columns = array("Part Number", "Part Description", "Rate", "Stock" ,'Inspection');
             $sheet->getStyle('C1:D1')->applyFromArray($headingsStyle1);
             $sheet->getStyle('C:C')->applyFromArray($headingsStyle1);
             $sheet->getStyle('D:D')->applyFromArray($headingsStyle1);
+            $sheet->getStyle('E1:E1')->applyFromArray($headingsStyle);
+           
+            if($isSheetMetal != "Yes"){
+                array_push($table_columns,'Molding Production Qty');
+                $sheet->getStyle('F1:F1')->applyFromArray($headingsStyle);
+            }
+            
         }
-
+        
         $column = 0;
         foreach ($table_columns as $field) {
             $object->getActiveSheet()->setCellValueByColumnAndRow($column, 1, $field);
@@ -1475,7 +1489,7 @@ class ExportController extends CommonController
         switch ($expType){
             case 'supplier':
                     $sheet->setTitle('SupplierParts');
-                    $select_sql="SELECT cp.part_number,cp.part_description, u.uom_name, cp.store_stock_rate as rate, cps.stock
+                    $select_sql="SELECT cp.part_number,cp.part_description, u.uom_name, cp.store_stock_rate as rate, cps.stock,cps.production_qty
                         FROM child_part cp
                         LEFT JOIN child_part_stock cps ON cp.id = cps.childPartId
                         INNER JOIN uom u ON cp.uom_id = u.id
@@ -1484,7 +1498,7 @@ class ExportController extends CommonController
                     break;
             case 'customer':
                     $sheet->setTitle('CustomerParts');
-                    $select_sql = "SELECT cpm.part_number,cpm.part_description, cpm.fg_rate as rate, cpms.fg_stock as stock
+                    $select_sql = "SELECT cpm.part_number,cpm.part_description, cpm.fg_rate as rate, cpms.fg_stock as stock,cpm.final_inspection_location,cpms.molding_production_qty
                         FROM customer_parts_master cpm
                         LEFT JOIN customer_parts_master_stock cpms ON cpm.id = cpms.customer_parts_master_id
                         AND cpms.clientId = " . $clientId;
@@ -1502,7 +1516,7 @@ class ExportController extends CommonController
         }
 
         $customer_parts = $this->Crud->customQuery($select_sql);
-        
+       
         if ($customer_parts) {
             $excel_row = 2;
             $rowNo = 1;
@@ -1514,8 +1528,19 @@ class ExportController extends CommonController
                 if($expType != 'customer'){
                     $object->getActiveSheet()->setCellValueByColumnAndRow($colNo++, $excel_row, $p->uom_name);
                 }
+               
                 $object->getActiveSheet()->setCellValueByColumnAndRow($colNo++, $excel_row, $p->rate);
                 $object->getActiveSheet()->setCellValueByColumnAndRow($colNo++, $excel_row, $p->stock);
+                if($expType == 'supplier'){
+                    $object->getActiveSheet()->setCellValueByColumnAndRow($colNo++, $excel_row, $p->production_qty);
+                }
+                if($expType == 'customer'){
+                    $object->getActiveSheet()->setCellValueByColumnAndRow($colNo++, $excel_row, $p->final_inspection_location);
+                    if($isSheetMetal != "Yes"){
+                        $object->getActiveSheet()->setCellValueByColumnAndRow($colNo++, $excel_row, $p->molding_production_qty);
+                    }
+                   
+                }
                 $excel_row++;
                 $rowNo++;
             }
@@ -1545,7 +1570,10 @@ class ExportController extends CommonController
        $uploadedDoc = $this->input->post('uploadedDoc');
        $importType = $this->uri->segment('2');
        $clientId = $this->Unit->getSessionClientId();
-       
+       $entitlements = $this->session->userdata("entitlements");
+       $isSheetMetal = isset($entitlements['isSheetMetal']) && $entitlements['isSheetMetal'] != null ? "Yes" : "No";
+
+    //    pr('gewgegew',1);x
        //only valid types are allowed.
        $messages = "Something went wron.";
        $success = 0;
@@ -1561,6 +1589,7 @@ class ExportController extends CommonController
                         $objReader = PHPExcel_IOFactory::createReader($inputFileType);
                         $objPHPExcel = $objReader->load($inputFileName);
                         $allDataInSheet = $objPHPExcel->getActiveSheet()->toArray(null, true, true, true);
+                        // pr($allDataInSheet,1);
                         $flag = true;
                         $i=1;
 
@@ -1569,11 +1598,15 @@ class ExportController extends CommonController
                         if($importType != 'customer'){
                             $EXCEL_IMPORT_STOCK_RATE_COLUMN = 'D';
                             $EXCEL_IMPORT_STOCK_COLUMN = 'E';
+                            $EXCEL_PRODUCTION_QTY = 'F';
                         }else{
                             $EXCEL_IMPORT_STOCK_RATE_COLUMN = 'C';
                             $EXCEL_IMPORT_STOCK_COLUMN = 'D';
+                            $EXCEL_IMPORT_INSPECTION_COLUMN = 'E';
+                            $EXCEL_IMPORT_MOLDING_COLUMN = 'F';
+
                         }
-                      
+                        
                         foreach ($allDataInSheet as $value) {
                             // Check if the row is empty
                                 if (!empty(array_filter($value))) {
@@ -1614,11 +1647,17 @@ class ExportController extends CommonController
                                 $inserdata[$i]['row_no'] = $rowNum;
                                 $inserdata[$i]['part_stock_rate'] = $part_stock_rate;
                                 $inserdata[$i]['part_stock'] = $part_stock;
+                                $inserdata[$i]['production_qty'] = $value[$EXCEL_PRODUCTION_QTY];
+                                $inserdata[$i]['inspection'] = $value[$EXCEL_IMPORT_INSPECTION_COLUMN];
+                                $inserdata[$i]['moolding_qty'] = $value[$EXCEL_IMPORT_MOLDING_COLUMN];
+                                
                                 $i++;
                             }
-                        }
 
+                        }   
                         
+                        
+                       
                         if(empty($error)){
                             //there are no errors so lets move ahead with executing the file.
                             foreach($inserdata as $po_item) {
@@ -1626,11 +1665,11 @@ class ExportController extends CommonController
                                 switch ($importType){
                                     case 'supplier':
                                                 $this->load->model('SupplierParts');
-                                                $result = $this->SupplierParts->updateImportedStockDetails($clientId, $po_item['part_no'], $po_item['part_stock_rate'], $po_item['part_stock']);
+                                                $result = $this->SupplierParts->updateImportedStockDetails($clientId, $po_item['part_no'], $po_item['part_stock_rate'], $po_item['part_stock'],$po_item['production_qty']);
                                                 break;
                                     case 'customer':
                                                 $this->load->model('CustomerPart');
-                                                $result = $this->CustomerPart->updateImportedStockDetails($clientId, $po_item['part_no'], $po_item['part_stock_rate'], $po_item['part_stock']);
+                                                $result = $this->CustomerPart->updateImportedStockDetails($clientId, $po_item['part_no'], $po_item['part_stock_rate'], $po_item['part_stock'],$po_item['inspection'],$po_item['moolding_qty'],$isSheetMetal);
                                                 break;
                                     case 'inhouse':
                                                 $this->load->model('InhouseParts');

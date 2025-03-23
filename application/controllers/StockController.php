@@ -288,6 +288,7 @@ class StockController extends CommonController
 		$data = $this->SupplierParts->getPartStockReportView($condition_arr,$post_data["search"]);
 		$stock_column_name = $this->Unit->getStockColNmForClientUnit();
 		$sheet_prod_column_name = $this->Unit->getProdColNmForClientUnit();
+		
 		$plastic_prod_column_name = $this->Unit->getPlasticProdColNmForClientUnit();
 		$sharingQtyColName = $this->Unit->getSharingQtyColNmForClientUnit();
 		$role = $this->session->userdata('type');

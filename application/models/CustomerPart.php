@@ -723,11 +723,15 @@ class CustomerPart extends CI_Model {
         return $ret_data;
     }
     
-    public function updateImportedStockDetails($clientId,$partNo,$newStockRate,$newStock) {
-        // This will update the actual child part master as child_part table is for master and child_part_master is for linked supplier part
+    public function updateImportedStockDetails($clientId,$partNo,$newStockRate,$newStock,$inspection,$molding_qty,$isSheetMetal) {
+       // This will update the actual child part master as child_part table is for master and child_part_master is for linked supplier part
+            $mold_str = '';
+            if($isSheetMetal != 'Yes'){
+                $mold_str = ",cpms.molding_production_qty=$molding_qty";
+            }
             $sql = "UPDATE customer_parts_master_stock cpms
                     JOIN customer_parts_master cpm ON cpm.id = cpms.customer_parts_master_id
-                    SET cpm.fg_rate = ".$newStockRate.", cpms.fg_stock = ".$newStock."
+                    SET cpm.fg_rate = ".$newStockRate.", cpms.fg_stock = ".$newStock.", cpms.final_inspection_location=$inspection$mold_str
                     WHERE cpm.part_number = '".$partNo."' AND cpms.clientId = ".$clientId;
             if ($this->db->query($sql)) {
                 //if ($this->db->affected_rows() > 0) {//incase need to check whether record is updated or not
@@ -737,6 +741,7 @@ class CustomerPart extends CI_Model {
                 // Query failed
                 return false;
             }
+            
     }
 
     

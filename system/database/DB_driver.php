@@ -390,6 +390,7 @@ abstract class CI_DB_driver {
 		 * Depending on the database driver, conn_id can be either
 		 * boolean TRUE, a resource or an object.
 		 */
+		
 		if ($this->conn_id)
 		{
 			return TRUE;

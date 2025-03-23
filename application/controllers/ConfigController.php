@@ -399,7 +399,8 @@ class ConfigController extends AROMConfigController {
 
 	//Multiple Client support check
 	public function isMultiClientSupport() {
-		$isMultipleClientUnit = $this->session->userdata['isMultipleClientUnits'];
+		
+		$isMultipleClientUnit = isset($this->session->userdata['isMultipleClientUnits']) ? $this->session->userdata['isMultipleClientUnits'] : '';
 		if(empty($isMultipleClientUnit) || $isMultipleClientUnit == '' ) {
 			$isMultipleClientUnit = $this->readConfig("isMultipleClientUnits","false");
 			$this->session->set_userdata('isMultipleClientUnits',$isMultipleClientUnit);

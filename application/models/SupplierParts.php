@@ -1655,11 +1655,11 @@ class SupplierParts extends CI_Model {
         return $ret_data;
 
     }
-    public function updateImportedStockDetails($clientId,$partNo,$newStockRate,$newStock) {
+    public function updateImportedStockDetails($clientId,$partNo,$newStockRate,$newStock,$production_qty) {
         // This will update the actual child part master as child_part table is for master and child_part_master is for linked supplier part
             $sql = "UPDATE child_part cp
                     JOIN child_part_stock cps ON cp.id = cps.childPartId
-                    SET cp.store_stock_rate = ".$newStockRate.", cps.stock = ".$newStock."
+                    SET cp.store_stock_rate = ".$newStockRate.", cps.stock = ".$newStock.", cps.production_qty=$production_qty
                     WHERE cp.part_number = '".$partNo."' AND cps.clientId = ".$clientId;
             if ($this->db->query($sql)) {
                 //if ($this->db->affected_rows() > 0) {//incase need to check whether record is updated or not
